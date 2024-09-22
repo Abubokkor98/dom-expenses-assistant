@@ -9,10 +9,34 @@ const calCulateButton = document.getElementById('calculate').addEventListener('c
     const internet = parseFloat(document.getElementById('internet').value);
 
 
+    // validation
+    if (income <=0 || isNaN(income)){
+        document.getElementById('income-error').classList.remove('hidden');
+        return;
+    }
+    if (software <0 || isNaN(income)){
+        document.getElementById('software-error').classList.remove('hidden');
+        return;
+    }
+    if (courses <0 || isNaN(income)){
+        document.getElementById('courses-error').classList.remove('hidden');
+        return;
+    }
+    if (internet <0 || isNaN(income)){
+        document.getElementById('internet-error').classList.remove('hidden');
+        return;
+    }
 
 
     const totalExpenses = software + courses + internet;
     const balance = income - totalExpenses;
+
+    // total expense validation
+    if(totalExpenses > balance){
+        document.getElementById('logic-error').classList.remove('hidden');
+        return;
+    }
+
 
     const totalExpensesElement = document.getElementById('total-expenses');
     totalExpensesElement.innerText = totalExpenses.toFixed(2);
@@ -96,4 +120,15 @@ assistantTab.addEventListener('click', function(){
 
     document.getElementById('expense-form').classList.remove('hidden');
     document.getElementById('history-section').classList.add('hidden');
+})
+
+
+// live validation for input
+document.getElementById('income').addEventListener('input',function(){
+    const inputValue = parseFloat(document.getElementById('income').value);
+
+    if (inputValue <=0 || isNaN(inputValue)){
+        document.getElementById('income-error').classList.remove('hidden');
+        return;
+    }
 })
